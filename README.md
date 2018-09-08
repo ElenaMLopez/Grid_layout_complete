@@ -474,3 +474,87 @@ main {
 ```
 Con esto vemos cómo utilizar la unidad fr y distribuir según el espacio **disponible**.
 
+## Práctico 07: GRID template areas
+
+Una grid area, es el espacio delimitado por cuatro grid-lines. Es decir será siempre cuadrada o rectangular. Hay varias formas de definir un grid area, pero la más habitual y cómoda, es nombrala. 
+```css
+/* Nombrar las áreas: */
+
+header {
+    grid-area: header;
+}
+aside:first-of-type {
+    grid-area: izquierda;
+}
+article {
+    grid-area: contenido;
+}
+aside:last-of-type {
+    grid-area: derecha;
+}
+footer {
+    grid-area: footer;
+}
+```
+Y ahora en el elemento main, hay que decir como se distribuyen estas áreas, y pensando en mobile-first podemos empezar con la versión mobil, q será una columna solo:
+```css
+main {
+    display: grid;
+    font-family: sans-serif;
+    height: 100vh;
+    grid-gap: 10px;
+
+    grid-template-areas: 
+        "header"
+        "contenido"
+        "izquierda"
+        "derecha"
+        "footer";
+}
+```
+Ahora introducimos otro diseño para un viewport superior:
+```css
+@media (min-width: 600px) {
+    grid-template-areas: 
+        "header header header"
+        "izquierda contenido derecha"
+        "footer footer footer";
+}
+```
+
+Esto es totalmente compatible con aplicar medidas a cada track, así que probemos a hacerlo:
+```css
+@media (min-width: 600px) {
+    main {
+        grid-template-areas: 
+            "header header header"
+            "izquierda contenido derecha"
+            "footer footer footer";
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 2fr 5fr 1fr;
+    }
+}
+```
+
+Si deseamos que un elemento no ocupe todo el espacio se puede poner un punto en el *grid-template-area*:
+```css
+    main {
+        grid-template-areas: 
+            "header header header"
+            "izquierda contenido derecha"
+            "footer footer ."; /* Poniendo un punto se deja esa sección sin footer*/
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 2fr 5fr 1fr;
+    }
+```
+Y si por algún motivo deseamos que una columna ocupe hasta el final o se meta en otra columna, podemos querer que la parte derecha ocupe las tres filas, y con tan solo nombrarlo en el *grid-template-area* lo podemos hacer:
+```css
+    main {
+        grid-template-areas: 
+            "header header derecha"
+            "izquierda contenido derecha"
+            "footer footer derecha";
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 2fr 5fr 1fr;
+    }
+```
