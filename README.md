@@ -274,3 +274,80 @@ main {
 }
 ```
 Descomentando el div 10 vemos como mantiene la proporción con el resto.
+
+## Práctico 04: Usando GRID lines por su nombre.
+
+Vamos a ver como describir un Grid de otra forma, nombrando líneas, y poder referirnos a ellas. Es algo parecido a nombrar las áreas. Con esto conseguimos más control sobre el Grid.
+
+Partiendo de este html:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Grid</title>
+</head>
+<body>
+    <main>
+        <header> Header </header>
+        <aside> Sidebar </aside>
+        <article> Contenido </article>
+        <footer> Footer </footer>
+    </main>
+</body>
+</html>
+```
+Ponemos este css:
+```css
+main {
+    display: grid;
+    height: 100vh;
+    gap: 10px;
+    /*nombrar líneas:*/
+    grid-template-columns:
+        [sidebar-start] 1fr
+        [contenido-start] 2fr;
+    grid-template-rows: 
+        [header-start] 1fr
+        [contenido-start] 2fr
+        [footer-start] 1fr;
+}
+
+main > * {
+    background-color: goldenrod;
+    border-radius: .25em;
+    display: flex;
+    font-family: sans-serif;
+    font-size: 3em;
+    justify-content: center;
+    align-items: center;
+}
+```
+Fijándonos en las propiedades *grid-template-columns* y *grid-template-rows*, vemos como se han nombrado las líneas donde empieza el sidebar y el contenido, para las columnas, y dónde comienzan y terminan las filas header, contenido y footer. 
+
+Ahora tan sólo queda colocar los elementos entre las líneas que deseemos:
+
+```css
+header {
+    grid-column: sidebar-start / span 2; /* con esto le decimos que el header: empieza en la línea sidebar-start y se extiende 2 */
+}
+
+footer {
+    grid-column: sidebar-start / span 2; /* con esto le decimos que el footer: empieza en la línea sidebar-start y se extiende 2 */
+}
+```
+Respecto a la altura se mantiene.
+
+Imaginemos que ahora queremos cambiar la disposición y que el sidebar llegue hasta abajo y el footer se corte:
+```css
+header {
+    grid-column: sidebar-start / span 2; /* con esto le decimos que el header: empieza en la línea sidebar-start y se extiende 2 */
+}
+
+aside {
+    grid-row: contenido-start / span 2; /* con esto le decimos que el asode: empieza en la línea contenido-start y se extiende 2 acia abajo, porque son rows*/
+}
+```

@@ -1,0 +1,39 @@
+main {
+    display: grid;
+    height: 100vh;
+    gap: 10px;
+    /*nombrar líneas:*/
+    grid-template-columns:
+        [sidebar-start] 1fr
+        [contenido-start] 2fr;
+    grid-template-rows: 
+        [header-start] 1fr
+        [contenido-start] 2fr
+        [footer-start] 1fr;
+}
+
+main > * {
+    background-color: goldenrod;
+    border-radius: .25em;
+    display: flex;
+    font-family: sans-serif;
+    font-size: 3em;
+    justify-content: center;
+    align-items: center;
+}
+
+/* header {
+    grid-column: sidebar-start / span 2; /* con esto le decimos que el header: empieza en la línea sidebar-start y se extiende 2 */
+}
+/*
+footer {
+    grid-column: sidebar-start / span 2; /* con esto le decimos que el footer: empieza en la línea sidebar-start y se extiende 2 
+} */
+
+header {
+    grid-column: sidebar-start / span 2; /* con esto le decimos que el header: empieza en la línea sidebar-start y se extiende 2 */
+}
+
+aside {
+    grid-row: contenido-start / span 2; /* con esto le decimos que el footer: empieza en la línea sidebar-start y se extiende 2 */
+}
