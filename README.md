@@ -667,3 +667,6 @@ div:first-of-type {
 
 }
 ```
+
+## Práctico 10: GRID dinámico con auto-fill y auto-fit.
+

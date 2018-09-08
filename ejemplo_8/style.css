@@ -12,30 +12,6 @@ main {
     height: 100vh;
     grid-gap: 10px;
     /* definiendo la distribución del grid: */
-    /* grid-template-columns: repeat(12, 1fr);
-    /* patron de 3 columnas repetidas 4 veces y que las columnas tuviesen diferentes valores 
-    grid-template-columns: 
-        repeat(4,
-            minmax(80px, 1fr)
-            minmax(40px, 1fr)
-            minmax(20px, 1fr)
-        ); */
-    /* Podemos determinar donde empieza y acaba el grid y a la vez nombrar las lineas, para luego 
-    poder distribuir los elementos */
-    grid-template-columns: 
-        [start]
-        repeat(4,
-            [col-xl-start] minmax(80px, 1fr)
-            [col-xl-end col-m-start] minmax(40px, 1fr)
-            [col-m-end col-s-start] minmax(20px, 1fr)
-        )
-        [end]
-        ;
-}
-
-div:first-of-type {
-    background-color: purple;
-    /* grid-column: col-xl-start / col-m-end; */
-    grid-column: col-xl-start / end;
 
 }
+
