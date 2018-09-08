@@ -1,4 +1,4 @@
-main > * {
+div {
     background-color: rgb(0, 0, 97);
     color: wheat;
     display: flex;
@@ -6,39 +6,36 @@ main > * {
     align-items: center;
 }
 
-/* main {
-    display: grid;
-    font-family: sans-serif;
-    height: 100vh;
-    grid-gap: 10px;
-    /* definiendo la distribución del grid: 
-    grid-template-columns: repeat(8, minmax(60px, 150px));
-} */
-/* 8 columnas con un patrón de dos (30px y minimo 10% y máximo flexible (1fr)*/
-/* main {
-    display: grid;
-    font-family: sans-serif;
-    height: 100vh;
-    grid-gap: 10px;
-    /* definiendo la distribución del grid: 
-    grid-template-columns: repeat(4, 60px minmax(10%, 1fr));
-} */
-
-/* 8 columnas con un tamaño mínimo determinado por el contenido*/
-/* main {
-    display: grid;
-    font-family: sans-serif;
-    height: 100vh;
-    grid-gap: 10px;
-    /* definiendo la distribución del grid: 
-    grid-template-columns: repeat(8, minmax(min-content, 1fr));
-} */
-/* 8 columnas con un tamaño máximo y mínimo determinado por el contenido*/
 main {
     display: grid;
     font-family: sans-serif;
     height: 100vh;
     grid-gap: 10px;
     /* definiendo la distribución del grid: */
-    grid-template-columns: repeat(8, minmax(min-content, max-content));
+    /* grid-template-columns: repeat(12, 1fr);
+    /* patron de 3 columnas repetidas 4 veces y que las columnas tuviesen diferentes valores 
+    grid-template-columns: 
+        repeat(4,
+            minmax(80px, 1fr)
+            minmax(40px, 1fr)
+            minmax(20px, 1fr)
+        ); */
+    /* Podemos determinar donde empieza y acaba el grid y a la vez nombrar las lineas, para luego 
+    poder distribuir los elementos */
+    grid-template-columns: 
+        [start]
+        repeat(4,
+            [col-xl-start] minmax(80px, 1fr)
+            [col-xl-end col-m-start] minmax(40px, 1fr)
+            [col-m-end col-s-start] minmax(20px, 1fr)
+        )
+        [end]
+        ;
+}
+
+div:first-of-type {
+    background-color: purple;
+    /* grid-column: col-xl-start / col-m-end; */
+    grid-column: col-xl-start / end;
+
 }

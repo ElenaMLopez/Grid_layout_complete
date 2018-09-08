@@ -613,3 +613,57 @@ main {
     grid-template-columns: repeat(8, minmax(min-content, max-content));
 }
 ```
+## Práctico 09: Repetir valores y patrones con repeat()
+
+No hay mucho que explicar, tan solo ver diversas formas de realizar patrones y repeticiones de estos.
+Comenzamos con una repetición básica de 12 columnas:
+```css
+main {
+    display: grid;
+    font-family: sans-serif;
+    height: 100vh;
+    grid-gap: 10px;
+    /* definiendo la distribución del grid: */
+    grid-template-columns: repeat(12, 1fr);
+```
+Podemos insertar un patrón de repetición de columnas de distintos tamaños (minimos en este caso):
+```css
+    /* patron de 3 columnas repetidas 4 veces y que las columnas tuviesen diferentes valores */
+    grid-template-columns: 
+        repeat(4,
+            minmax(80px, 1fr)
+            minmax(40px, 1fr)
+            minmax(20px, 1fr)
+        );
+```
+Incluso, podemos nombrar las líneas en el momento, por si alguien hecha de menos Bootstrap...
+```css
+    /* Podemos determinar donde empieza y acaba el grid y a la vez nombrar las lineas, para luego 
+    poder distribuir los elementos */
+    grid-template-columns: 
+        [start]
+        repeat(4,
+            [col-xl-start] minmax(80px, 1fr)
+            [col-xl-end col-m-start] minmax(40px, 1fr)
+            [col-m-end col-s-start] minmax(20px, 1fr)
+        )
+        [end]
+        ;
+}
+
+div:first-of-type {
+    background-color: purple;
+    grid-column: col-xl-start / col-m-end;
+}
+
+```
+Hacer todo esto con css sin grid es una barbaridad. 
+Incluso podemos hacer que el primer elemento vaya hasta el final de todas las columnas:
+```css
+div:first-of-type {
+    background-color: purple;
+    /* grid-column: col-xl-start / col-m-end; */
+    grid-column: col-xl-start / end;
+
+}
+```
