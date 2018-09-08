@@ -1,0 +1,67 @@
+hr {
+    margin-bottom: 20px;
+}
+h1 {
+    font-family: 'Courier New', Courier, monospace; 
+}
+
+.main1 > div {
+    background-color: goldenrod;
+    border-radius: .25em;
+    font-size: 1em;
+    padding: 1em;
+}
+
+/* Definimos el Grid container */
+
+.main1 {
+    margin-bottom: 20px;
+    /* Declaramos el display como grid */
+    display: grid;
+    grid-gap: 1em;
+    /* Vamos a definir las columnas y las filas */
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+}
+/* Ejemplo 2 */
+
+.main2 > div {
+    background-color: purple;
+    border-radius: .25em;
+    font-size: 1em;
+    padding: 1em;
+}
+
+/* Definimos el Grid container */
+
+.main2 {
+    margin-bottom: 20px;
+    /* Declaramos el display como grid */
+    display: grid;
+    grid-gap: 1em;
+    /* Vamos a definir las columnas y las filas */
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+}
+    /* Ejemplo 2 */
+
+.item2:nth-child(10) {
+    background-color: blueviolet;
+    grid-column-start: 3;
+    grid-column-end: 5;
+    /* Formas abreviadas:
+    grid-column: 3 / 5; /*--> de la columna 3 a la 5. 
+    grid-column: 3 / -1 /*--> de la columna 3 al final. 
+    */
+}
+
+    /* Ejemplo 3 */
+.item2:nth-child(6) {
+    background-color: rgb(194, 0, 194);
+    grid-column: 2 / 3;
+    /* grid-row-start: 2;
+    grid-row-end: 4; */
+    /* Formas abreviadas:*/
+    /* grid-row: 2 / 4; */
+    grid-row: span 2;
+}

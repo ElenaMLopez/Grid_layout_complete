@@ -149,3 +149,95 @@ De esta sencilla forma tenemos un típico layout que de otra forma suele ser má
     }
 }
 ```
+
+
+## Práctico 02: Terminología y primeros pasos
+
+Es fundamental conocer la terminología de grid para entender cómo funciona. Por otra parte, se ha de ver la diferencia con FlexBox que opera en una dimensión y Grid Layout opera en dos dimensiones, por lo que pueden complementarse.
+
+Conceptos:
+
+**Grid container**: Elemento que hace de rejilla/contenedor. En el ejemplo *main*:
+```css
+main {
+    display: grid;
+}
+```
+
+**Grid Item**: Cada uno de los items hijos de un Grid container. La relación *parent/children* se denomina **GRID Context**.
+
+**Grid Line**: El contenedor Grid, está formado por dos tipos de líneas, las horizontales y las verticales. Se puede hacer referencia a las líneas o bien por número o por nombre. La primera línea (borde del grid) se identifica ya con el 1.
+
+**Grid Track**: Nombre genérico para un GRID row o GRID column. Es el espacio verticla u horizontal entre dos GRID lines **consecutivas**. Define de esta forma, el alto de un Grid Column o el ancho de un GRID row.
+
+**Grid Cell**: Es la intersección entre un track vertical y otro horizontal, lo equivalente a una celda de una tabla. Es la unidad más pequeña a nuestra disposición para colocar un item
+
+**Grid Area**: Cualquier porción del GRID contenido entre **4 líneas** del grid. Tiene N número de GRID Cells.
+
+**Ejemplo 1:**
+
+Veamos como declarar un grid y distribuir en el 4 columnas y tres filas:
+```css
+main > div {
+    background-color: goldenrod;
+    border-radius: .25em;
+    font-size: 1em;
+    padding: 1em;
+}
+
+/* Definimos el Grid container */
+
+main {
+    height: 100vh;
+    /* Declaramos el display como grid */
+    display: grid;
+    grid-gap: 1em;
+    /* Vamos a definir las columnas y las filas */
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+}
+```
+**Ejemplo 2:**
+
+Imaginemos ahora que lo que deseamos es que el elemento 10 ocupe más, 2 espacios por ejemplo. Para ello debemos primero acceder al elemento y luego con las propiedades *grid-colum-start* y *grid-colum-end* definimos el origen y el final:
+```css
+.item2:nth-child(10) {
+    background-color: blueviolet;
+    grid-column-start: 3;
+    grid-column-end: 5;
+     /* Formas abreviadas:
+    grid-column: 3 / 5; /*--> de la columna 3 a la 5. 
+    grid-column: 3 / -1; /*--> de la columna 3 al final. 
+    */
+}
+```
+**Ejemplo 3:**
+
+Ahora queremos que el elemento 6 ocupe dos filas, la fila 2 y 3, pero sólo ese elemento. Se puede hacer de la siguiente forma:
+```css
+    /* Ejemplo 3 */
+.item2:nth-child(6) {
+    background-color: rgb(194, 0, 194);
+    grid-column: 2 / 3;
+    grid-row-start: 2;
+    grid-row-end: 4; 
+    /* Formas abreviadas:*/
+    /* grid-row: 2 / 4; 
+}
+```
+Es necesario poner en este caso el *grid-column: 2 / 3;*, puesto que si no mueve el elemento 6 al principio (comentar la línea de código que setea las columnas para ver que pasa).
+
+Existe una propiedad que es la de *span* y esto extiende los elementos, pero tan sólo de momento saber q está ahí. 
+```css
+.item2:nth-child(6) {
+    background-color: rgb(194, 0, 194);
+    grid-column: 2 / 3;
+    /* grid-row-start: 2;*/
+    /* grid-row-end: 4;  */
+     /* Formas abreviadas: */
+    /* grid-row: 2 / 4;  */
+    grid-row: span 2;
+}
+```
+
+Y por supuesto podemos cambiar la estructura según el viewport.
