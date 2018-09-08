@@ -410,3 +410,67 @@ footer {
 }
 ```
 
+## Práctico 06: La unidad fr
+
+Vamos a ver que es exactamente una unidad fr (fraction unit). Una fr es una unidad de medida que aprobecha el espacio ya sea vertical u horizontal disponible que quede después de distribuir otras filas y otras columnas. 
+
+Comenzamos con un template sencillo:
+```css
+main {
+    display: grid;
+    height: 100vh;
+    grid-gap: 1rem;
+    font-family: sans-serif;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+}
+```
+La unidad fr tiene más peso que poner auto:
+```css
+main {
+    display: grid;
+    height: 100vh;
+    grid-gap: 1rem;
+    font-family: sans-serif;
+    grid-template-columns: auto 1fr auto; /* fr toma el espacio disponible, escepto lo que ocupe
+    el contenido de las dos primeras columnas seteadas a auto */
+    grid-template-rows: 1fr 2fr 1fr;
+}
+```
+Se puede combinar con px, porcentaje, rem...
+```css
+main {
+    display: grid;
+    height: 100vh;
+    grid-gap: 1rem;
+    font-family: sans-serif;
+    grid-template-columns: 20rem 1fr 150px;
+    grid-template-rows: 10% 2fr 50px;
+}
+```
+Juguemos un poco con el responsive, para ver como se comporta:
+```css
+main {
+    display: grid;
+    height: 100vh;
+    grid-gap: 1rem;
+    font-family: sans-serif;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+}
+
+@media (max-width: 600px) {
+    main {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(5, 1fr);
+    }
+}
+@media (max-width: 400px) {
+    main {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(9, 1fr);
+    }
+}
+```
+Con esto vemos cómo utilizar la unidad fr y distribuir según el espacio **disponible**.
+
