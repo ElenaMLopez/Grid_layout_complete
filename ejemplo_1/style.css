@@ -1,0 +1,13 @@
+main > * {
+    background-color: goldenrod;
+    border-radius: .25em;
+    font-size: 3em;
+    padding: 1em;
+}
+
+/* Definimos el Grid container */
+
+main {
+    display: grid;
+    grid-gap: 1em;
+}
