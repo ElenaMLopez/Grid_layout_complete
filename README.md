@@ -40,5 +40,112 @@ Como consulta y complemento a lo que se explica, podemos utilizar la guía de [C
 
 Utilizaremos como ejemplo los archivos contenidos en Ejemplo_1 que tiene [este resultado](ejemplo_1/index.html).
 
+Grid ha venido para quedarse y es necesario conocer cómo funciona. 
+A modo motivacional vamos a ver un sencillo ejemplo que tendrá un responsive muy simple también, y de esta forma comprobar el gran potencial de esta especificación. De momento no nos detenemos demasiado a explicar conceptos, tan sólo fijémonos en lo que se puede hacer fácilmente.
 
+Tenemos un elemento *main* que deseamos que a partir de 500px para abajo, se vea en una sóla columna y para el resto de otra forma. 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Grid</title>
+</head>
+<body>
+    <main>
+        <header> Header </header>
+        <aside> Izquerda </aside>
+        <article> Contenido </article>
+        <aside> Derecha </aside>
+        <footer> Footer </footer>
+    </main>
+    
+</body>
+</html>
+```
 
+En el archivo de estilos, tenemos lo básico desde dónde arrancamos:
+```css
+main > * {
+    background-color: goldenrod;
+    border-radius: .25em;
+    font-size: 3em;
+    padding: 1em;
+}
+
+/* Definimos el Grid container */
+main {
+    display: grid;
+    grid-gap: 1em; /* espacio entre celdas del grid
+}
+```
+
+Lo primero que haremos será nombrar cada elemento del html, mediante la propiedad grid-area, de esta forma asignamos a cada elemento un nombre, para poder trabajar con el en grid.
+```css
+
+/* Nombramos los elementos (las áreas) */
+
+header {
+    grid-area: header;
+}
+
+aside:first-of-type {
+    grid-area: izquierda;
+}
+
+aside:last-of-type {
+    grid-area: derecha;
+}
+
+article {
+    grid-area: contenido;
+}
+
+footer {
+    grid-area: footer;
+}
+
+```
+Con otra propiedad defino que disposición que quiero que tengan esas areas. Como partimos de mobile, empezamos con eso, así dentro del contenedor, debo especificar cómo quiero que se distribuyan esas áreas de la siguiente forma:
+```css
+main {
+    display: grid;
+    grid-gap: 1em;
+    /* definimos el grid-template-area que distribuye los elementos según se le diga */
+    grid-template-areas: 
+        "header"
+        "izquierda"
+        "contenido"
+        "derecha"
+        "footer";
+}
+```
+De esta forma definimos el orden, y en este caso es tan solo una sola columna, pero hagamos ahora la versión desktop:
+```css
+/* Desktop */
+
+@media (min-width: 500px){
+    main {
+        grid-template-areas: 
+            "header header header"
+            "izquierda contenido derecha"
+            "footer footer footer"
+    }
+}
+```
+De esta sencilla forma tenemos un típico layout que de otra forma suele ser más complicado hacer. Tan solo anotar que en caso de que por algún motivo kisieramos que el header por ejemplo, sólo ocupase dos de las 3 columnas, puede dejarse el espacio vacío poniendo un punto:
+```css
+/* Desktop */
+
+@media (min-width: 500px){
+    main {
+        grid-template-areas: 
+            "header header ."
+            "izquierda contenido derecha"
+            "footer footer footer"
+    }
+}
+```

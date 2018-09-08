@@ -10,4 +10,44 @@ main > * {
 main {
     display: grid;
     grid-gap: 1em;
+    /* definimos el grid-template-area que distribuye los elementos según se le diga */
+    grid-template-areas: 
+        "header"
+        "izquierda"
+        "contenido"
+        "derecha"
+        "footer";
+}
+/* Desktop */
+
+@media (min-width: 500px){
+    main {
+        grid-template-areas: 
+            "header header header"
+            "izquierda contenido derecha"
+            "footer footer footer"
+    }
+}
+
+
+/* Nombramos los elementos (las áreas) */
+
+header {
+    grid-area: header;
+}
+
+aside:first-of-type {
+    grid-area: izquierda;
+}
+
+aside:last-of-type {
+    grid-area: derecha;
+}
+
+article {
+    grid-area: contenido;
+}
+
+footer {
+    grid-area: footer;
 }
