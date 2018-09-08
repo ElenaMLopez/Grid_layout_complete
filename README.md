@@ -11,7 +11,7 @@ El temario será el siguiente:
 - Práctico 03: Separación entre los elementos GRID
 - Práctico 04: Usando GRID lines por su nombre
 - Práctico 05: GRID start & end lines
-- Práctico 06: GRID start & end lines
+- Práctico 06: La unidad fr
 - Práctico 07: GRID template areas
 - Práctico 08: Establecer límites con minmax()
 - Práctico 09: Repetir valores y patrones con repeat()
@@ -351,3 +351,62 @@ aside {
     grid-row: contenido-start / span 2; /* con esto le decimos que el asode: empieza en la línea contenido-start y se extiende 2 acia abajo, porque son rows*/
 }
 ```
+
+## Práctico 05: GRID start & end lines.
+
+Si a parte de nombrar los inicios de los tracks podríamos nombrar el final de las líneas, y ser aun más explicito a la hora de dimensionar los tracks. 
+
+Nombrar las líneas que suponen el final del track es  tan sencillo como esto:
+```css
+main {
+    display: grid;
+    height: 100vh;
+    gap: 10px;
+    /*nombrar líneas:*/
+    grid-template-columns:
+        [sidebar-start] 1fr
+        [sidebar-end contenido-start] 2fr
+        [contenido-end]; /*no es necesario darle tamaño, porque es la última línea!*/
+
+    grid-template-rows: 
+        [header-start] 1fr
+        [header-end contenido-start] 2fr
+        [contenido-end footer-start] 1fr
+        [footer-end];
+}
+```
+En todos los casos, las líneas que son end, son el start de otro track también, a excepción de la última línea vertical y la última línea horizontal claro, por lo que a la hora de definir el inicio de un track, se nombra también el final del anterior. 
+
+Veamos como podemos ser de explícitos en el layout, con esto nos ahorramos también el tener que usar span, teniendo más control sobre lo que hacemos.
+```css
+main {
+    display: grid;
+    height: 100vh;
+    gap: 10px;
+    /*nombrar líneas:*/
+    grid-template-columns:
+        [sidebar-start] 1fr
+        [sidebar-end contenido-start] 2fr
+        [contenido-end]; /*no es necesario darle tamaño, porque es la última línea!*/
+
+    grid-template-rows: 
+        [header-start] 1fr
+        [header-end contenido-start] 2fr
+        [contenido-end footer-start] 1fr
+        [footer-end];
+}
+/* confil default del main */
+
+header {
+    grid-column: sidebar-start / contenido-end; /*comienzas donde empieza el sidebar y acabas donde acaba el contenido*/
+}
+
+aside {
+    grid-row: header-end / footer-end; /* con esto le decimos que el footer: empieza en la línea sidebar-start y se extiende 2 */
+}
+
+footer {
+    grid-column: contenido-start / contenido-end; /* Ocupas sólo desde que empieza el contenido hasta que acaba */
+}
+```
+

@@ -1,0 +1,38 @@
+main {
+    display: grid;
+    height: 100vh;
+    gap: 10px;
+    /*nombrar líneas:*/
+    grid-template-columns:
+        [sidebar-start] 1fr
+        [sidebar-end contenido-start] 2fr
+        [contenido-end]; /*no es necesario darle tamaño, porque es la última línea!*/
+
+    grid-template-rows: 
+        [header-start] 1fr
+        [header-end contenido-start] 2fr
+        [contenido-end footer-start] 1fr
+        [footer-end];
+}
+
+main > * {
+    background-color: goldenrod;
+    border-radius: .25em;
+    display: flex;
+    font-family: sans-serif;
+    font-size: 3em;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    grid-column: sidebar-start / contenido-end;
+}
+
+aside {
+    grid-row: header-end / footer-end; /* con esto le decimos que el footer: empieza en la línea sidebar-start y se extiende 2 */
+}
+
+footer {
+    grid-column: contenido-start / contenido-end;
+}
