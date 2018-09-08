@@ -558,3 +558,58 @@ Y si por algún motivo deseamos que una columna ocupe hasta el final o se meta e
         grid-template-rows: 2fr 5fr 1fr;
     }
 ```
+
+## Práctico 08: Establecer límites con minmax()
+
+La función minmax() es tremendamente útil a la hora de determinar los tamaños maximos y mínimos de los tracks. La sintaxis es sencilla ``` minmax(tamaño_minimo, tamaño_maximo)```, donde ambos pueden expresarse en cualquier forma aceptada por css grid: fr, px, %, rem...
+
+Veamos unos ejemplos:
+
+```css
+main {
+    display: grid;
+    font-family: sans-serif;
+    height: 100vh;
+    grid-gap: 10px;
+    /* definiendo la distribución del grid: */
+    grid-template-columns: repeat(8, minmax(60px, 150px));
+}
+```
+Pueden hacerse patrones, por ejemplo en este caso repeat(numero_repeticiones, medida_primera_columna_del_patron minmax(10%, 1fr)), donde minmax dice la medida mínima y máxima de la segunda columna del patrón:
+
+```css
+/* 8 columnas con un patrón de dos (30px y minimo 10% y máximo flexible (1fr)*/
+
+main {
+    display: grid;
+    font-family: sans-serif;
+    height: 100vh;
+    grid-gap: 10px;
+    /* definiendo la distribución del grid: */
+    grid-template-columns: repeat(4, 60px minmax(10%, 1fr));
+}
+```
+Minmax() viene acompañado de dos formas de evitar q haya overflow del contenedor, estos son min-content y max-content, el primero es para un mínimo del contenido y el otro para que no ocupe más del máximo del contenido.
+```css
+/* 8 columnas con un tamaño mínimo determinado por el contenido*/
+ main {
+    display: grid;
+    font-family: sans-serif;
+    height: 100vh;
+    grid-gap: 10px;
+    /* definiendo la distribución del grid: */
+    grid-template-columns: repeat(8, minmax(min-content, 1fr));
+} 
+```
+Y lo mismo para max-content:
+```css
+/* 8 columnas con un tamaño máximo y mínimo determinado por el contenido*/
+main {
+    display: grid;
+    font-family: sans-serif;
+    height: 100vh;
+    grid-gap: 10px;
+    /* definiendo la distribución del grid: */
+    grid-template-columns: repeat(8, minmax(min-content, max-content));
+}
+```
