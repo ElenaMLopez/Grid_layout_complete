@@ -241,3 +241,36 @@ Existe una propiedad que es la de *span* y esto extiende los elementos, pero tan
 ```
 
 Y por supuesto podemos cambiar la estructura según el viewport.
+
+## Práctico 03: Separación entre los elementos GRID:
+
+El *grid-gap* determina la separación que habrá entre grid tracks, se puede poner de varias formas:
+```css
+main {
+    display: grid;
+    height: 100vh;
+    /* Grid gap:*/
+    grid-gap: 1rem;
+     /* otras formas:*/
+    /* grid-column-gap: 1rem; */
+    /* grid-column-gap: 2rem; */
+    /* grid-gap: 1rem 2rem; */    
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+```
+Se ha dejado un elemento comentado en el html, el elemento 10, si se descomenta, grid no lo elimina, tan sólo lo añade como elemento implicito. Expliquemos esto. 
+
+Todos los elementos que no estaban comentados (los div's del 1 al 9) han sido explicitamente definidos, se les ha dado un ancho y un alto dentro del grid con el *grid-template*, pero este último no, puesto que se sale (sobrepasa) los límites del grid (que se ha definido para 9 elementos 3 columnas por 3 filas). Grid en este caso lo añade, pero ocupa el espacio de su contenido a lo alto, y a lo ancho, lo que ocupe la columna. Si por algún motivo (por ejemplo una página dinámica) aparecen más elementos hay unas propiedades en grid, que determinan el tamaño de las celdas que irán ocupando. Ésta son *grid-auto-rows* (determinará el alto) y *grid-auto-columns* (determinará el ancho, por defecto el que esté en el grid-template para la columna donde se inserte).
+```css
+main {
+    display: grid;
+    height: 100vh;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+        /* Inplicit grid */
+    grid-auto-rows: 1fr;
+}
+```
+Descomentando el div 10 vemos como mantiene la proporción con el resto.
